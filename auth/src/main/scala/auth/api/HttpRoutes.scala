@@ -7,7 +7,7 @@ import zio.http.model.{Method, Status}
 object HttpRoutes {
   val app: HttpApp[Any, Response] =
     Http.collectZIO[Request] {
-      case Method.GET -> !! / "hello" => ZIO.succeed(Response.text("Hello ci/cd auth"))
+      case Method.GET -> !! / "hello" => ZIO.succeed(Response.text("Hello ci/cd auth ---- "))
       case req@Method.POST -> !! / "greeting" / "by" =>
         val response =
           for {
