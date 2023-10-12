@@ -1,0 +1,39 @@
+name: deploy-yc
+
+on:
+  workflow_run:
+    workflows: [publish-to-docker-hub]
+    types: [completed]
+    branches: [main]
+
+jobs:
+  deploy:
+    name: Deploy to YC
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.0
+
+      - name: Adding known_hosts
+        run: |
+          mkdir ~/.ssh
+          ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+
+
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.YANDEX_CLOUD_KEY }}
+          known_hosts: ~/.ssh/known_hosts
+
+      - name: Copy docker-compose.yaml
+        run: |
+          scp docker-compose.yaml vmxd@${{ SSH_HOST }}:~/mipt-project/docker-compose.yaml
+
+      - name: Connect VM_YC
+        run: |
+          ssh vmxd@${{ SSH_HOST }} "
+          docker compose -f ~/mipt-project/docker-compose.yaml pull
+          docker compose -f ~/mipt-project/docker-compose.yaml up -d
+          "
+          
