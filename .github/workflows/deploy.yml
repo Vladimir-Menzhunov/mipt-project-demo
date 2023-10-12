@@ -24,7 +24,7 @@ jobs:
 
       - name: Copy docker-compose.yaml
         run: |
-          scp docker-compose.yaml vmxd@${{ secrets.SSH_HOST }}:~/mipt-project/docker-compose.yaml
+          scp docker-compose.yaml vmxd@${{ secrets.SSH_HOST }}:~/mipt-services/docker-compose.yaml
 
       - name: Connect VM_YC
         run: |
