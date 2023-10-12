@@ -1,0 +1,20 @@
+name: publish-to-docker-hub
+
+on: [push]
+
+jobs: 
+  publish-auth:
+    name: Publish auth
+    runs-on: ubuntu-latest
+    steps:
+      - name: publish auth
+        run: |
+          echo "publish auth"
+
+  publish-routing:
+    name: Publish routing
+    runs-on: ubuntu-latest
+    steps:
+      - name: publish routing
+        run: |
+          echo "publish routing"
