@@ -1,10 +1,6 @@
 name: deploy-yc
 
-on:
-  workflow_run:
-    workflows: [publish-to-docker-hub]
-    types: [completed]
-    branches: [main]
+on: [push]
 
 jobs:
   deploy:
