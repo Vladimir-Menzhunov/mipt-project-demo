@@ -28,11 +28,11 @@ jobs:
 
       - name: Copy docker-compose.yaml
         run: |
-          scp docker-compose.yaml vmxd@${{ SSH_HOST }}:~/mipt-project/docker-compose.yaml
+          scp docker-compose.yaml vmxd@${{ secrets.SSH_HOST }}:~/mipt-project/docker-compose.yaml
 
       - name: Connect VM_YC
         run: |
-          ssh vmxd@${{ SSH_HOST }} "
+          ssh vmxd@${{ secrets.SSH_HOST }} "
           docker compose -f ~/mipt-project/docker-compose.yaml pull
           docker compose -f ~/mipt-project/docker-compose.yaml up -d
           "
