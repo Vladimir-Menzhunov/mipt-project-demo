@@ -31,7 +31,7 @@ jobs:
           context: .
           file: ./Dockerfile.auth
           push: true
-          tags: ${{ steps.meta-auth.output.tags }}
+          tags: ${{ steps.meta-auth.outputs.tags }}
   
   publish-routing:
     name: Publish routing
@@ -58,4 +58,4 @@ jobs:
           context: .
           file: ./Dockerfile.routing
           push: true
-          tags: ${{ steps.meta-routing.output.tags }}
+          tags: ${{ steps.meta-routing.outputs.tags }}
